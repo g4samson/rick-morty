@@ -1,12 +1,10 @@
 package com.docs.rickmorty.domain.repository
 
-import android.util.Log
 import com.docs.rickmorty.data.model.responses.CharacterResponse
-import com.docs.rickmorty.data.model.responses.GetAllCharactersResponse
 import com.docs.rickmorty.data.utils.Provider
 import javax.inject.Inject
 
-class DomainRepositoryImpl @Inject constructor() : DomainRepository {
+class DomainServiceImpl @Inject constructor() : DomainService {
     private val retrofit get() = Provider.provideRetrofit()
 
     override suspend fun getAllCharacters(): Pair<Int, List<CharacterResponse>> {

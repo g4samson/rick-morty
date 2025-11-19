@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.docs.rickmorty.R
-import com.docs.rickmorty.data.utils.Character
+import com.docs.rickmorty.data.model.Character
 import com.docs.rickmorty.presentation.screens.homeScreen.HomeViewModel
 import com.docs.rickmorty.presentation.theme.Blue
 import com.docs.rickmorty.presentation.theme.LightGray

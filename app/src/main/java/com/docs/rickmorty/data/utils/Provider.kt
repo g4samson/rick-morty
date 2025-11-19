@@ -13,9 +13,9 @@ import javax.inject.Singleton
 object Provider {
     @Provides
     @Singleton
-    fun provideRetrofit(): RetrofitApi {
+    fun provideRetrofit(): RetrofitRepository {
         return Retrofit.Builder().baseUrl("https://rickandmortyapi.com/api/")
             .addConverterFactory(GsonConverterFactory.create()).build()
-            .create(RetrofitApi::class.java)
+            .create(RetrofitRepository::class.java)
     }
 }

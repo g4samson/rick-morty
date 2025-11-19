@@ -32,10 +32,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.docs.rickmorty.R
-import com.docs.rickmorty.data.utils.Character
+import com.docs.rickmorty.data.model.Character
 import com.docs.rickmorty.presentation.composable.bottomSheetComponent.BottomSheetComponent
 import com.docs.rickmorty.presentation.composable.cardComponent.CardComponent
 import com.docs.rickmorty.presentation.theme.Dark
@@ -45,11 +46,16 @@ import com.docs.rickmorty.presentation.theme.Green
 import com.docs.rickmorty.presentation.theme.Typography
 import kotlinx.coroutines.launch
 
+@Composable
+fun HomeScreenRoute(modifier: Modifier, viewmodel: HomeViewModel = hiltViewModel()) {
+    val characters by viewmodel.charactersList.collectAsState(emptyList())
+
+    HomeScreenUi(characters = characters)
+} // не знаю, как иначе прокидывать viewmodel(
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(modifier: Modifier, viewmodel: HomeViewModel = hiltViewModel()) {
-    val characters = viewmodel.charactersList.collectAsState(initial = listOf()).value
-
+fun HomeScreenUi(characters: List<Character>) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     var selectedCharacter by remember { mutableStateOf<Character?>(null) }
@@ -106,7 +112,7 @@ fun HomeScreen(modifier: Modifier, viewmodel: HomeViewModel = hiltViewModel()) {
                         ) {
                             Spacer(Modifier.height(20.dp))
                             Text(
-                                "That's all!",
+                                stringResource(R.string.end),
                                 style = Typography.bodyMedium.copy(color = DefWhite.copy(alpha = 0.5f))
                             )
                             Spacer(Modifier.height(5.dp))

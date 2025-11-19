@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.docs.rickmorty.R
-import com.docs.rickmorty.data.utils.Character
+import com.docs.rickmorty.data.model.Character
 import com.docs.rickmorty.presentation.theme.Dark
 import com.docs.rickmorty.presentation.theme.Green
 import com.docs.rickmorty.presentation.theme.Primary
