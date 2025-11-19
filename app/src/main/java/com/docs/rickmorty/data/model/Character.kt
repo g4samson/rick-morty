@@ -1,4 +1,4 @@
-package com.docs.rickmorty.data.utils
+package com.docs.rickmorty.data.model
 
 data class Character(
   val id: Int = -1,

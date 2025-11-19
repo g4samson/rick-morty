@@ -1,10 +1,8 @@
 package com.docs.rickmorty.domain.repository
 
 import com.docs.rickmorty.data.model.responses.CharacterResponse
-import com.docs.rickmorty.data.model.responses.GetAllCharactersResponse
-import com.docs.rickmorty.data.model.responses.GetCharacterResponse
 
-interface DomainRepository {
+interface DomainService {
 
     suspend fun getAllCharacters(): Pair<Int, List<CharacterResponse>>
 
