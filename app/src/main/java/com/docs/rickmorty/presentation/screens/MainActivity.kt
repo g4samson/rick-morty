@@ -1,5 +1,6 @@
 package com.docs.rickmorty.presentation.screens
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,13 +14,18 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.core.graphics.toColorInt
 import androidx.core.view.WindowCompat
+import com.docs.rickmorty.data.model.Character
+import com.docs.rickmorty.domain.repository.DomainServiceImpl
 import com.docs.rickmorty.presentation.composable.topAppBarComponent.TopAppBarComponent
-import com.docs.rickmorty.presentation.screens.homeScreen.HomeScreenRoute
+import com.docs.rickmorty.presentation.screens.homeScreen.HomeScreenUi
+import com.docs.rickmorty.presentation.screens.homeScreen.HomeViewModel
 import com.docs.rickmorty.presentation.theme.RickMortyTheme
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.compose.runtime.collectAsState
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @SuppressLint("ViewModelConstructorInComposable")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             RickMortyTheme {
                 val window = (this as Activity).window
+                val viewmodel = HomeViewModel(DomainServiceImpl())
 
                 SideEffect {
                     window.statusBarColor = "#000000".toColorInt()
@@ -40,7 +47,9 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopAppBarComponent()
                     }) { innerPadding ->
-                    HomeScreenRoute(modifier = Modifier.padding(innerPadding))
+                    HomeScreenUi(modifier = Modifier.padding(innerPadding),
+                        viewmodel.charactersList.collectAsState().value
+                    )
                 }
             }
         }
