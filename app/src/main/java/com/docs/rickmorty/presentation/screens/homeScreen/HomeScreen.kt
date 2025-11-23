@@ -46,16 +46,9 @@ import com.docs.rickmorty.presentation.theme.Green
 import com.docs.rickmorty.presentation.theme.Typography
 import kotlinx.coroutines.launch
 
-@Composable
-fun HomeScreenRoute(modifier: Modifier, viewmodel: HomeViewModel = hiltViewModel()) {
-    val characters by viewmodel.charactersList.collectAsState(emptyList())
-
-    HomeScreenUi(characters = characters)
-} // не знаю, как иначе прокидывать viewmodel(
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenUi(characters: List<Character>) {
+fun HomeScreenUi(modifier: Modifier, characters: List<Character>) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     var selectedCharacter by remember { mutableStateOf<Character?>(null) }
